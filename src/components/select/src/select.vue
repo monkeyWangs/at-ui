@@ -16,7 +16,7 @@
       class="at-select__selection"
       ref="trigger"
       @click="toggleMenu">
-      <span class="at-tag" v-for="(item, index) in selectedMultiple" :key="item">
+      <span class="at-tag" v-for="(item, index) in selectedMultiple">
         <span class="at-tag__text">{{ item.label }}</span>
         <i class="icon icon-x at-tag__close" @click.stop="removeTag(index)"></i>
       </span>
@@ -28,6 +28,7 @@
         :placeholder="showPlaceholder ? localePlaceholder : ''"
         v-if="filterable"
         v-model="query"
+        :disabled="disabled"
         @blur="handleBlur"
         @keydown.delete="handleInputDelete"
         ref="input">
@@ -118,6 +119,7 @@ export default {
       visible: false,
       options: [],
       optionInstances: [],
+      showInstances: [],
       selectedSingle: '',
       selectedMultiple: [],
       focusIndex: 0,
@@ -158,6 +160,9 @@ export default {
     model () {
       this.$emit('input', this.model)
       this.modelToQuery()
+      this.$nextTick(() => {
+        this.updateOptions()
+      })
 
       if (this.multiple) {
         this.updateMultipleSelected()
@@ -411,9 +416,9 @@ export default {
       let isValid = false
       let hasValidOption = false // avoid infinite loops
 
-      const options = findComponentsDownward(this, 'AtOption')
+      // const options = findComponentsDownward(this, 'AtOption')
 
-      options.forEach(option => {
+      this.optionInstances.forEach(option => {
         if (option.index === this.focusIndex) {
           isValid = !option.disabled && !option.hidden
 

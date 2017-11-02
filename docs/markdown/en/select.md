@@ -142,7 +142,7 @@ To set search mode, add `filterable` property to the Select.
 
 :::demo
 ```html
-<at-select v-model="model8" filterable size="large" style="width: 240px">
+<at-select v-model="model8" filterable style="width: 240px">
   <at-option value="1">Shenzhen</at-option>
   <at-option value="2">Guangzhou</at-option>
   <at-option value="3">Shanghai</at-option>

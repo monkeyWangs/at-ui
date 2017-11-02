@@ -142,7 +142,7 @@
 
 :::demo
 ```html
-<at-select v-model="model8" filterable size="large" style="width: 240px">
+<at-select v-model="model8" filterable style="width: 240px">
   <at-option value="1">深圳</at-option>
   <at-option value="2">广州</at-option>
   <at-option value="3">上海</at-option>
